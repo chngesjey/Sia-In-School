@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
+use DB;
+use Str;
 
 class AuthController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('auth.index');
     }
 
@@ -23,4 +27,20 @@ class AuthController extends Controller
         Auth::logout(); 
         return redirect('/login');
     }
+
+    public function register(){
+        return view('auth.register');
+    }
+    public function simpanRegister(Request $request){
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'remember_token'=> Str::random(20),
+        ]); 
+
+        return view('auth.index');
+    }
+
 }

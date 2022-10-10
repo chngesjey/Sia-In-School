@@ -11,10 +11,12 @@ use App\Http\Controllers\{
 };
 
 Route::get('/', function () {
-    return view('layout.app');
+    return view('auth.index');
 });
 
 // Route Login & LogOut
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/simpanRegister', [AuthController::class, 'simpanRegister'])->name('simpanRegister');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('login.postlogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
