@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\Mapel;
 use App\Models\Kelas;
+use App\Models\User;
 use Validator;
+use Str;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -76,15 +78,18 @@ class SiswaController extends Controller
             if($validator->fails()){
                 return response()->json($validator->errors(), 422);
             }
-    
-            $siswa = Siswa::create([
-                'nama' => $request->nama,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'alamat' => $request->alamat,   
-                'kelas_id' => $request->kelas_id,
-                'mapel_id' => $request->mapel_id
-            ]);
-    
+
+            $user= new User;
+            $user-> role = 'siswa';
+            $user-> name = $request->nama;
+            $user-> email = $request->email;
+            $user->password = bcrypt('12345678');
+            $user->remember_token = Str::random(20);
+            $user->save();
+
+            $request->request->add(['user_id' => $user->id]);
+            $siswa = Siswa::create($request->all());
+
             return response()->json([
                 'success' => true,
                 'message' => 'Data Berhasil Disimpan',

@@ -30,6 +30,7 @@
                             </a>
                         </li>
 
+                        @if(auth()->user()->role == 'admin')
                         <li class="nav-header">Master</li>
 
                         <li class="nav-item">
@@ -67,7 +68,7 @@
                                 </p>
                             </a>
                         </li>
-
+                        @endif
                     </ul>
                 </nav>
 

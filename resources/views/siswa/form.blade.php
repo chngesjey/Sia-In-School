@@ -19,6 +19,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" autocomplete="off" class="form-control" name="email" id="email">
+                    </div>
+
+                    <div class="form-group">
                         <label for="jenis_kelamin">Jenis Kelamin</label>
                         <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
                             <option value="" class="" selected>Pilih Kelamin Kak...</option>

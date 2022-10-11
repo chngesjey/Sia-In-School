@@ -22,7 +22,7 @@ Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('login.pos
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => ['auth', 'checkRole:admin']], function(){
     
     // Profile
     // Route::get('/profile', [])
@@ -46,4 +46,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/siswa/data', [SiswaController::class, 'data'])->name('siswa.data');
     Route::resource('/siswa', SiswaController::class);  
 
+});
+
+Route::group(['middleware' => ['auth', 'checkRole:admin,siswa']], function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 });
