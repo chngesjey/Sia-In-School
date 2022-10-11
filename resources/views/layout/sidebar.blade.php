@@ -12,7 +12,7 @@
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="info">
                         <!-- Nanti Kalau Dipencet Mengarah Ke Profile -->
-                        <a href="#" class="d-block">{{Auth()->user()->name}}</a> 
+                        <a href="#" class="d-block">{{!empty(Auth()->user()->name) ? Auth()->user()->name:''}}</a> 
                     </div>
                 </div>
 
